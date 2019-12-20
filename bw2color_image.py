@@ -41,6 +41,7 @@ net.getLayer(conv8).blobs = [np.full([1, 313], 2.606, dtype="float32")]
 image = cv2.imread(args["image"])
 scaled = image.astype("float32") / 255.0
 lab = cv2.cvtColor(scaled, cv2.COLOR_BGR2LAB)
+grayscale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # resize the Lab image to 224x224 (the dimensions the colorization
 # network accepts), split channels, extract the 'L' channel, and then
@@ -78,4 +79,6 @@ colorized = (255 * colorized).astype("uint8")
 # show the original and output colorized images
 cv2.imshow("Original", image)
 cv2.imshow("Colorized", colorized)
+cv2.imshow("grayscale", grayscale)
+
 cv2.waitKey(0)
